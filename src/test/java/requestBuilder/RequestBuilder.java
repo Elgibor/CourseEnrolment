@@ -5,8 +5,7 @@ import io.restassured.response.Response;
 import static Common.BasePaths.ndosi_BaseURL;
 import static Common.ContentType.contentType;
 import static io.restassured.RestAssured.given;
-import static payloadBuilder.PayloadBuilder.createUserPayload;
-import static payloadBuilder.PayloadBuilder.loginPayload;
+import static payloadBuilder.PayloadBuilder.*;
 
 public class RequestBuilder {
     public static String token;
@@ -57,10 +56,11 @@ public class RequestBuilder {
     public static Response enrollUserToCourse() {
         Response response = given().
                 when().
+                body(enrollUserToCoursePayload(userId, "courseId", "notes")).
                 contentType(contentType).
                 header("Authorization", "Bearer " + token).
                 log().all().
-                put(ndosi_BaseURL + "/admin/enrollments").
+                post(ndosi_BaseURL + "/admin/enrollments").
                 then().
                 log().all().
                 extract().response();

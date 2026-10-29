@@ -39,4 +39,13 @@ public class NdosiAutomationAPITests {
                 statusCode(Success_Status);
     }
 
+    @Test(dependsOnMethods = "loginAsAdminUserTests")
+    @Description("As an api user i want to enroll a user to a course")
+    @Severity(SeverityLevel.BLOCKER)
+    public void enrollUserToCourseTests() {
+        enrollUserToCourse().
+                then().
+                assertThat().
+                statusCode(Success_Status);
+    }
 }

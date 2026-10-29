@@ -53,4 +53,17 @@ public class RequestBuilder {
                 extract().response();
         return response;
     }
+
+    public static Response enrollUserToCourse() {
+        Response response = given().
+                when().
+                contentType(contentType).
+                header("Authorization", "Bearer " + token).
+                log().all().
+                put(ndosi_BaseURL + "/admin/enrollments").
+                then().
+                log().all().
+                extract().response();
+        return response;
+    }
 }

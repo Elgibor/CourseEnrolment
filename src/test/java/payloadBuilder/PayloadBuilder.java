@@ -22,4 +22,12 @@ public class PayloadBuilder {
         loginObject.addProperty("password", password);
         return loginObject;
     }
+
+    public static JsonObject enrollUserToCoursePayload(String userId, String courseId, String notes) {
+        JsonObject enrollmentObject = new JsonObject();
+        enrollmentObject.addProperty("userId", userId);
+        enrollmentObject.addProperty("courseId", courseId);
+        enrollmentObject.addProperty("notes", notes);
+        return enrollmentObject;
+    }
 }

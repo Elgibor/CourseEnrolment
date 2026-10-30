@@ -53,8 +53,8 @@ public class NdosiAutomationAPITests {
     @Test(dependsOnMethods = "loginAsAdminUserTests")
     @Description("As an api user i want to verify the enrollment of a user to a course")
     @Severity(SeverityLevel.BLOCKER)
-    public void verifyEnrollmentTests() {
-        verifyEnrollment(enrollmentId).
+    public void verifyCourseEnrollmentTests() {
+        verifyCourseEnrollment(enrollmentId).
                 then().
                 assertThat().
                 statusCode(Success_Status).

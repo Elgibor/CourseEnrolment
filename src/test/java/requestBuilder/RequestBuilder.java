@@ -70,7 +70,7 @@ public class RequestBuilder {
         return response;
     }
 
-    public static Response verifyEnrollment(String enrollmentId) {
+    public static Response verifyCourseEnrollment(String enrollmentId) {
         Response response = given().
                 when().
                 contentType(contentType).

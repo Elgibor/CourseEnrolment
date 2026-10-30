@@ -9,5 +9,7 @@ public class CommonTestData {
     public static String adminUsername = "admin@gmail.com";
     public static String adminPassword = "@12345678";
     public static String groupId = "84e73141-6bac-478b-af93-ee03ad492e21";
+    public static String courseId = "31b1143b-aa19-4c20-bdf6-6700484b0dcb";
+    public static String notes = "Enrolling user to course";
 
 }

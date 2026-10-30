@@ -10,6 +10,8 @@ import static payloadBuilder.PayloadBuilder.*;
 public class RequestBuilder {
     public static String token;
     public static String userId;
+    public static String enrollmentId;
+    public static String status;
 
     public static Response createUserResponse(String firstName, String lastName, String email, String password, String confirmPassword, String groupId) {
         Response response = given().
@@ -53,10 +55,10 @@ public class RequestBuilder {
         return response;
     }
 
-    public static Response enrollUserToCourse() {
+    public static Response enrollUserToCourse(String userId, String courseId, String notes) {
         Response response = given().
                 when().
-                body(enrollUserToCoursePayload(userId, "courseId", "notes")).
+                body(enrollUserToCoursePayload(userId, courseId, notes)).
                 contentType(contentType).
                 header("Authorization", "Bearer " + token).
                 log().all().
@@ -64,6 +66,20 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+        enrollmentId = response.jsonPath().getString("data.enrollmentId");
         return response;
+    }
+
+    public static Response verifyEnrollment(String enrollmentId) {
+        Response response = given().
+                when().
+                contentType(contentType).
+                header("Authorization", "Bearer " + token).
+                log().all().
+                get(ndosi_BaseURL + "/admin/enrollments/" + enrollmentId +"/history").
+                then().
+                log().all().
+                extract().response();
+              return response;
     }
 }

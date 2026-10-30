@@ -4,6 +4,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.annotations.Test;
+import static org.hamcrest.Matchers.*;
 
 import static Common.CommonTestData.*;
 import static Common.GenerateTestData.*;
@@ -43,9 +44,20 @@ public class NdosiAutomationAPITests {
     @Description("As an api user i want to enroll a user to a course")
     @Severity(SeverityLevel.BLOCKER)
     public void enrollUserToCourseTests() {
-        enrollUserToCourse().
+        enrollUserToCourse(userId, courseId, notes).
                 then().
                 assertThat().
-                statusCode(Success_Status);
+                statusCode(Creation_Success);
+    }
+
+    @Test(dependsOnMethods = "loginAsAdminUserTests")
+    @Description("As an api user i want to verify the enrollment of a user to a course")
+    @Severity(SeverityLevel.BLOCKER)
+    public void verifyEnrollmentTests() {
+        verifyEnrollment(enrollmentId).
+                then().
+                assertThat().
+                statusCode(Success_Status).
+                body("data.enrollment.Status", equalTo("enrolled"));
     }
 }
